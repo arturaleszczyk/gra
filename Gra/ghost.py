@@ -62,7 +62,10 @@ class Ghost:
         ghost_should_move = 0
         for ghost in self.ghosts:
             directions = get_possible_directions(ghost)
-            ghost.dir = randint(0, 3) # losowanie w którą stronę idzie
+            if ghost.in_center and directions[1]:
+                ghost.dir = 1
+            else:
+                ghost.dir = randint(0, 3) # losowanie w którą stronę idzie
             while directions[ghost.dir] == 0 or (abs(ghost.last_dir - ghost.dir) == 2 and directions.count(1) > 1): # jeżeli tafimy na brak ruchu czyli 0 losujemy ponownie
                 ghost.dir = randint(0, 3)
             animate(ghost, pos=(ghost.x + self.ghost_moves[ghost.dir][0],
