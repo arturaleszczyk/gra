@@ -4,7 +4,7 @@ from pygame import image, Color
 
 # pobieramy kolor z obrazka
 
-moveimage = image.load('images/move_map.png')
+moveimage = image.load('Gra/images/move_map.png')
 
 
 def check_move_point(pacman):
