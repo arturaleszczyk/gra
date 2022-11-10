@@ -5,7 +5,7 @@ from pgzero.screen import Screen
 from ghost import Ghost
 BLACK = (0,0,0)
 WIDTH = 600
-HEIGHT = 660
+HEIGHT = 700
 keys: keyboard
 screen: Screen
 
@@ -31,7 +31,7 @@ def on_key_up(key):
 
 def update():
     pacman.update()
-    ghost.update()
+    ghost.update(pacman.pacman.pos) # aktor klasy Pacman
 
 
 pgzrun.go()
