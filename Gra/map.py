@@ -4,7 +4,7 @@ from pygame import image, Color
 
 # pobieramy kolor z obrazka
 
-moveimage = image.load('Gra/images/move_map.png')
+moveimage = image.load('images/move_map.png')
 
 
 def check_move_point(pacman):
@@ -19,10 +19,10 @@ def check_move_point(pacman):
     if pacman.keys_active['down']:
         move_y = 1
 # obsługa wyjścia pacmana z ekranu
-    if pacman.x+move_x < 0:
+    if pacman.x + move_x < 0:
         pacman.x = 576
         return True
-    if pacman.x+move_x > 576:
+    if pacman.x + move_x + pacman.width / 2 > 600:
         pacman.x = 0
         return True
 # jeżeli pacman wejdzie na kolor black ruch ma zostać zablokowany
