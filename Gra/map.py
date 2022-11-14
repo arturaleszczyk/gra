@@ -5,7 +5,8 @@ from pygame import image, Color
 # pobieramy kolor z obrazka
 
 moveimage = image.load('images/move_map.png')
-
+#rysujemy drugą mapę pod monety
+dotimage = image.load('images/dot_map.png')
 
 def check_move_point(pacman):
     move_x, move_y = 0,0
@@ -57,3 +58,14 @@ def get_possible_directions(ghost): # funkcja sprawdza gdzie duch doszedł oraz 
         directions[3] = 1
     return directions
 
+# sprawdzamy x oraz y
+# zamieniamy na int
+# jeżeli punkt na mapie jest niebieski, stawiamy monetę ( kropki niebieskie na czarnych ścieżkach )
+# jeżeli punkt na mapie jest zielony stawiamy bonus
+def check_dot_point(x, y):
+    point = int(x), int(y)
+    if dotimage.get_at(point) == Color('blue'):
+        return 1
+    if dotimage.get_at(point) == Color('green'):
+        return 2
+    return 0
