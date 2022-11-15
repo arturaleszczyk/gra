@@ -4,9 +4,9 @@ from pygame import image, Color
 
 # pobieramy kolor z obrazka
 
-moveimage = image.load('images/move_map.png')
+moveimage = image.load('Gra/images/move_map.png')
 #rysujemy drugą mapę pod monety
-dotimage = image.load('images/dot_map.png')
+dotimage = image.load('Gra/images/dot_map.png')
 
 def check_move_point(pacman):
     move_x, move_y = 0,0
