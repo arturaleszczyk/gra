@@ -64,14 +64,6 @@ def gamerank_list(request):
     )
 
 
-def urls_list(request):
-    return render(
-        request,
-        template_name='urls_list.html',
-        context={'urls': Url.objects.all()}
-    )
-
-
 class GameRankCreateView(CreateView):
 
     template_name = 'form.html'
@@ -119,7 +111,7 @@ class GameRankView(LoginRequiredMixin, View):
            profile.save()
            return render(
                request, template_name='movies_list.html',
-               context={'movies': Movie.objects.all()}
+               context={'GameRank': GameRank1.objects.all()}
            )
        else:
            return render(request, template_name='no_clicks.html')
