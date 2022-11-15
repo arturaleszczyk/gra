@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from GameRank.models import Genre, GameRank1, Url
+from GameRank.models import Genre, GameRank1
 from GameRank.admin import WebAppAdmin
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 
@@ -23,7 +23,6 @@ from GameRank.views import hello, gamerank_list, SignUpView
 
 admin.site.register(Genre)
 admin.site.register(GameRank1, WebAppAdmin)
-admin.site.register(Url)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
