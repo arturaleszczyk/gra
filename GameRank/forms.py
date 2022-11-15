@@ -15,15 +15,15 @@ def capitalized_validator(value):
         raise ValidationError('Value must be capitalized.')
 
 
-class PastMonthField(DateField):
-    def validate(self, value):
-        super().validate(value)
-        if value >= date.today():
-            raise ValidationError('Only past dates allowed here.')
+# class PastMonthField(DateField):
+#     def validate(self, value):
+#         super().validate(value)
+#         if value >= date.today():
+#             raise ValidationError('Only past dates allowed here.')
 
-    def clean(self, value):
-        result = super().clean(value)
-        return date(year=result.year, month=result.month, day=1)
+    # def clean(self, value):
+    #     result = super().clean(value)
+    #     return date(year=result.year, month=result.month, day=1)
 
 
 class GameRankForm(ModelForm):
@@ -35,21 +35,20 @@ class GameRankForm(ModelForm):
     class Meta:
         model = GameRank1
         fields = '__all__'
-    title = CharField(validators=[capitalized_validator])
-    rating = IntegerField(min_value=1, max_value=10)
-    released = PastMonthField()
+    username = CharField(validators=[capitalized_validator])
+    ranking = IntegerField(min_value=1, max_value=100)
 
-    def clean_description(self):
-        # Force each sentence of the description to be capitalized.
-        initial = self.cleaned_data['description']
-        sentences = re.sub(r'\s*\.\s*', '.', initial).split('.')
-        return '. '.join(sentence.capitalize() for sentence in sentences)
+    # def clean_description(self):
+    #     # Force each sentence of the description to be capitalized.
+    #     initial = self.cleaned_data['description']
+    #     sentences = re.sub(r'\s*\.\s*', '.', initial).split('.')
+    #     return '. '.join(sentence.capitalize() for sentence in sentences)
 
     def clean(self):
         result = super().clean()
-        if result['genre'].name == 'commedy' and result['rating'] > 5:
+        if result['genre'].name == 'commedy' and result['ranking'] > 100:
             raise ValidationError(
-                "Commedies aren't so good to be rated over 5."
+                "Commedies aren't so good to be rated over 100."
             )
         return result
 
@@ -67,7 +66,7 @@ from .models import Profile
 class SignUpForm(UserCreationForm):
 
    class Meta(UserCreationForm.Meta):
-       fields = ['username', 'first_name']
+       fields = ['username']
 
    @atomic
    def save(self, commit=True):

@@ -6,7 +6,7 @@ class Genre(Model):
     username = CharField(max_length=128)
 
     def __str__(self):
-        return self.name
+        return self.username
 
 
 class GameRank1(Model):
@@ -18,10 +18,6 @@ class GameRank1(Model):
         return str(self.__dict__)
 
 
-class Url(Model):
-    url = CharField(max_length=256)
-    short_code = CharField(max_length=8)
-
 class Profile(Model):
-   user = OneToOneField(User, on_delete=CASCADE)
+   username = OneToOneField(User, on_delete=CASCADE)
    clicks_left = IntegerField()

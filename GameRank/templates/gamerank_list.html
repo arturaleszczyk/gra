@@ -3,21 +3,14 @@
 {% block content %}
     <table>
         <tr>
-            <td><b>Title</b></td>
-            <td><b>Genre</b></td>
-            <td><b>Rating</b></td>
-            <td><b>Released</b></td>
-            <td><b>Description</b></td>
-            <td><b>Created</b></td>
+            <td><b>username</b></td>
+            <td><b>ranking</b></td>
         </tr>
-        {% for movie in movies %}
+        {% for x in lista %}
+        <p>{{x}}</p>
             <tr>
-                <td>{{ movie.title }}</td>
-                <td>{{ movie.genre }}</td>
-                <td>{{ movie.rating }}</td>
-                <td>{{ movie.released }}</td>
-                <td>{{ movie.description }}</td>
-                <td>{{ movie.created }}</td>
+               <td><b>username</b></td>
+            <td><b>ranking</b></td>
             </tr>
         {% endfor %}
     </table>

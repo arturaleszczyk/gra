@@ -13,11 +13,11 @@ class WebAppAdmin(admin.ModelAdmin):
 
    ordering = ['id']
    list_display = ['id', 'username', 'ranking']
-   list_display_links = ['id', 'username']
+   list_display_links = ['id', 'username', 'ranking']
    list_per_page = 20
    list_filter = ['username']
    search_fields = ['username']
    fieldsets = [
-      (None, {'fields': ['username', 'created']}),
+      (None, {'fields': ['username', 'ranking', 'created']}),
    ]
    readonly_fields = ['created']
