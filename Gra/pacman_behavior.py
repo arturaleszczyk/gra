@@ -9,7 +9,8 @@ class Pacman:
         self.pacman = Actor("pacman_o")
         self.pacman.keys_active = {'right': False, 'up': False, 'left': False, 'down': False}
         self.pacman.x = 290
-        self.pacman.y = 570
+        self.pacman.y = 580
+        self.start_pos = self.pacman.x, self.pacman.y
         self.lives = 3
         self.teeth_time = 0.1
         self.teeth = False
