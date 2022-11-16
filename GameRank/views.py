@@ -19,7 +19,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-from .models import GameRank1, Profile, Genre
+from .models import GameRank1, Profile
 from .forms import GameRankForm, SingUpForm
 
 
@@ -62,8 +62,8 @@ def gamerank_list(request):
     #     template_name='gamerank_list.html',
     #     context={'gamerank': GameRank1.objects.all()}
     # )
-    username = Genre.objects.all()
-    ranking = GameRank1.objects.values('ranking')
+    username = GameRank1.objects.all()
+    ranking = GameRank1.objects.values('username', 'ranking')
     list = username, ranking
     return render(request, 'gamerank_list.html', {'lista': list})
 

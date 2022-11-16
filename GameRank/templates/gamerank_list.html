@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!--    <table>-->
-<!--        <tr>-->
-<!--            <td><b>username</b></td>-->
-<!--            <td><b>ranking</b></td>-->
-<!--        </tr>-->
-        {% for x in lista %}
-        <p>{{x}}</p>
-            <tr>
-               <td><b>username</b></td>
+    <table>
+        <tr>
+            <td><b>username</b></td>
             <td><b>ranking</b></td>
-            </tr>
+        </tr>
+        <td>{% for x in lista %}
+        <p>{{x}}</p>
+        </td>
+<!--            <tr>-->
+<!--               <td><b>username</b></td>-->
+<!--                <td><b>ranking</b></td>-->
+<!--            </tr>-->
         {% endfor %}
     </table>
 {% endblock %}

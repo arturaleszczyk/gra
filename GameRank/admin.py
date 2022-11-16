@@ -3,17 +3,9 @@ from django.contrib import admin
 
 class WebAppAdmin(admin.ModelAdmin):
 
-   @staticmethod
-   def released_year(obj):
-      return obj.released.year
-
-   @staticmethod
-   def cleanup_description(modeladmin, request, queryset):
-      queryset.update(description=None)
-
-   ordering = ['id']
-   list_display = ['id', 'username', 'ranking']
-   list_display_links = ['id', 'username', 'ranking']
+   ordering = ['ranking']
+   list_display = ['username', 'ranking']
+   list_display_links = ['username', 'ranking']
    list_per_page = 20
    list_filter = ['username']
    search_fields = ['username']
