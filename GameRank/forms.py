@@ -6,7 +6,7 @@ from django.forms import (
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm
 
-from GameRank.models import Genre, GameRank1
+from GameRank.models import GameRank1
 from datetime import date
 
 
@@ -46,9 +46,9 @@ class GameRankForm(ModelForm):
 
     def clean(self):
         result = super().clean()
-        if result['genre'].username == 'commedy' and ranking['ranking'] > 1000:
+        if result['genre'].username == 'commedy' and ranking['ranking']> 1000:
             raise ValidationError(
-                "Commedies aren't so good to be rated over 100."
+                "Commedies aren't so good to be rated over 1000."
             )
         return result
 
