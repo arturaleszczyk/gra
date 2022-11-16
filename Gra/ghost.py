@@ -1,8 +1,9 @@
 
-from pgzero.builtins import Actor, animate, Rect
+from pgzero.builtins import animate
 from random import randint, shuffle
 from map import get_possible_directions
 from time import time
+from constants import *
 
 ghost_should_move = 4  # 4 - YES, 0 - NO
 
@@ -13,7 +14,7 @@ def ghost_should_move_up():
 
 
 class Ghost:
-    def __init__(self):
+    def __init__(self, level=1):
         self.ghosts = [Actor(f'ghost{i}', pos=(250+(i*20), 370), anchor=(14, 8)) for i in range(1, 5)]
         ghost_types = ['predator', 'normal', 'normal', 'prey']
         shuffle(ghost_types)
@@ -23,13 +24,14 @@ class Ghost:
             ghost.in_center = True
             ghost.decide_point = 0, 8
             ghost.g_type = ghost_types.pop()
-            ghost.start_pos = ghost.pos # zapamiętujemy pozycję startową ghost
+            ghost.start_pos = ghost.pos
             ghost.current_animation = None
         self.disable_ghost_image = 'ghost5'
         self.enable = True
         self.disable_time = 0
         self.ghost_moves = (18, 0), (0, -18), (-18, 0), (0, 18)
         self.ghost_speed = 3
+        self.disable_max_time = max(3, 15 - (level-1)*0.5)
 
     def disable_ghost(self):
         self.enable = False
@@ -41,11 +43,11 @@ class Ghost:
         self.enable = True
         self.disable_time = 0
         for i, ghost in enumerate(self.ghosts):
-            ghost.image = f'ghost{i}'
+            ghost.image = f'ghost{i+1}'
 
     def ghost_in_center(self):
         for ghost in self.ghosts:
-            if 231 < ghost.x < 370 and 257+80 < ghost.y < 337+80:
+            if 231 < ghost.x < 370 and 257+HUD < ghost.y < 337+HUD:
                 ghost.in_center = True
             else:
                 ghost.in_center = False
@@ -55,6 +57,17 @@ class Ghost:
             ghost.draw()
 
     def update(self, pacman_pos):
+        if not self.enable:
+            left = self.disable_max_time - (time() - self.disable_time)
+            if 0 < left < 2:
+                if str(left)[:3][-1] in ['1', '3', '5', '7', '9']:
+                    for i, ghost in enumerate(self.ghosts):
+                        ghost.image = f'ghost{i+1}'
+                else:
+                    for ghost in self.ghosts:
+                        ghost.image = self.disable_ghost_image
+            elif left < 0:
+                self.enable_ghost()
         self.ghost_in_center()
         self.move_ghost(pacman_pos)
         for ghost in self.ghosts:
@@ -74,7 +87,7 @@ class Ghost:
             if ghost.in_center and directions[1]:
                 ghost.dir = 1
             elif ghost.g_type == 'normal' or (ghost.g_type == 'predator' and randint(1, 50) % 5 == 0) or \
-                    (ghost.g_type == 'prey' and randint(1, 50) % 10 == 0):
+                    (ghost.g_type == 'prey' and randint(1, 50) % 4 == 0):
                 ghost.dir = randint(0, 3)
                 while directions[ghost.dir] == 0 or (abs(ghost.last_dir - ghost.dir) == 2 and directions.count(1) > 1):
                     ghost.dir = randint(0, 3)
@@ -105,22 +118,15 @@ class Ghost:
                 ghost.dir = best_direction
             ghost.current_animation = animate(ghost, pos=(ghost.x + self.ghost_moves[ghost.dir][0],
                                                           ghost.y + self.ghost_moves[ghost.dir][1]),
-                                              duration=1 / self.ghost_speed, tween='linear',
+                                              duration=1/self.ghost_speed, tween='linear',
                                               on_finished=ghost_should_move_up)
 
-    # wykrywanie kolizji, tworzymy dwa prostokąty jak przy monetach i sprawdzamy czy jeden nachodzi na drugi
-
-
     def check_collision(self, pacman):
-        x, y, width, height = pacman.x, pacman.y, pacman.width, pacman.height
-        rect = Rect(x - width / 2, y - height / 2, width, height)
         for ghost in self.ghosts:
-            if ghost.colliderect(rect):
+            if ghost.colliderect(rect_for_pacman(pacman)):
                 if self.enable:
                     return 'pacman_busted', 'None'
                 else:
                     return 'ghost_busted', ghost
         return 'None', 'None'
-
-
 
