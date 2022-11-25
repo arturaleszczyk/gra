@@ -12,12 +12,12 @@ class BestPlayers:
         self.score = 0
         self.name = ''
         self.new_player_color = RED
-        with open('best.txt', 'r') as file:
-            for line in file:
-                if len(line) < 2:
-                    continue
-                split_line = line.split()
-                self.best_players.append((split_line[0], int(split_line[1])))
+        # with open('best.txt', 'r') as file:
+        #     for line in file:
+        #         if len(line) < 2:
+        #             continue
+        #         split_line = line.split()
+        #         self.best_players.append((split_line[0], int(split_line[1])))
 
     def set_score(self, score): # ustawiamy punktacje
         self.score = score
