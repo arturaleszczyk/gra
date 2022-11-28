@@ -1,10 +1,6 @@
-import sqlite3
-
 from constants import *
 
-conn = sqlite3.connect('db.sqlite3')
-c = conn.cursor()
-c.execute("""CREATE TABLE IF NOT EXISTS GRA(id integer primary key autoincrement, gracz TEXT,wynik integer)""")
+
 class BestPlayers:
     def __init__(self, screen):
         self.screen = screen
@@ -12,12 +8,12 @@ class BestPlayers:
         self.score = 0
         self.name = ''
         self.new_player_color = RED
-        # with open('best.txt', 'r') as file:
-        #     for line in file:
-        #         if len(line) < 2:
-        #             continue
-        #         split_line = line.split()
-        #         self.best_players.append((split_line[0], int(split_line[1])))
+        with open('best.txt', 'r') as file:
+            for line in file:
+                if len(line) < 2:
+                    continue
+                split_line = line.split()
+                self.best_players.append((split_line[0], int(split_line[1])))
 
     def set_score(self, score): # ustawiamy punktacje
         self.score = score
@@ -29,15 +25,9 @@ class BestPlayers:
             self.best_players.pop()
         lines = []
         for name, score in self.best_players: # zapisujemy do pliku
-            d = conn.cursor()
-            d.execute("insert into GRA('gracz','wynik') values('{}','{}')".format(name,score))
-            conn.commit()
-        #     lines.append(f'{name} {score}\n')
-        # with open('best.txt', 'w') as file:
-        #     file.writelines(lines)
-
-
-
+            lines.append(f'{name} {score}\n')
+        with open('best.txt', 'w') as file:
+            file.writelines(lines)
 
     def change_color(self):
         if self.new_player_color == RED:

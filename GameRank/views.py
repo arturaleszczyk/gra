@@ -1,27 +1,27 @@
-import sqlite3
-
 from django.shortcuts import render
 
 from django.http import HttpResponse
 
-
+def hello(request):
+    return HttpResponse('Hello, world!')
 
 import json
 import os.path
 import random
 import string
 from logging import getLogger
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import GameRank1, Profile, Wyniki
+import sqlite3
+
+from .models import GameRank1, Profile
 from .forms import GameRankForm, SingUpForm
 
-def hello(request):
-    return HttpResponse('Hello, world!')
 
 LOGGER = getLogger()
 
@@ -57,15 +57,8 @@ LOGGER = getLogger()
 
 
 def gamerank_list(request):
-    # return render(
-    #     request,
-    #     template_name='gamerank_list.html',
-    #     context={'gamerank': GameRank1.objects.all()}
-    # )
-    username = GameRank1.objects.all()
-    ranking = GameRank1.objects.values('username', 'ranking')
-    list = username, ranking
-    return render(request, 'gamerank_list.html', {'lista': list})
+    ranking = GameRank1.objects.all()
+    return render(request, 'gamerank_list.html', {'rankinglist': ranking})
 
 class GameRankCreateView(CreateView):
 
@@ -128,4 +121,3 @@ def gra_response(request):
     cur.execute(sql_query)
     result = cur.fetchall()
     return render(request, 'wyniki.html', {'x': result})
-

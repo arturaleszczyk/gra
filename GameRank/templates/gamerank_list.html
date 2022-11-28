@@ -2,17 +2,15 @@
 
 {% block content %}
     <table>
+<!--        <tr>-->
+<!--            <td><b>username</b></td>-->
+<!--            <td><b>ranking</b></td>-->
+<!--        </tr>-->
         <tr>
-            <td><b>username</b></td>
-            <td><b>ranking</b></td>
-        </tr>
-        <td>{% for x in lista %}
+        <td>{% for x in rankinglist %}
         <p>{{x}}</p>
+            {% endfor %}
         </td>
-<!--            <tr>-->
-<!--               <td><b>username</b></td>-->
-<!--                <td><b>ranking</b></td>-->
-<!--            </tr>-->
-        {% endfor %}
+        </tr>
     </table>
 {% endblock %}
