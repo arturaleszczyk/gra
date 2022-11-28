@@ -13,3 +13,4 @@ class WebAppAdmin(admin.ModelAdmin):
       (None, {'fields': ['username', 'ranking', 'created']}),
    ]
    readonly_fields = ['created']
+

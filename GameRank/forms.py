@@ -46,9 +46,9 @@ class GameRankForm(ModelForm):
 
     def clean(self):
         result = super().clean()
-        if result['genre'].username == 'commedy' and ranking['ranking']> 1000:
+        if result['genre'].username == 'commedy' and ranking['ranking']> 100000:
             raise ValidationError(
-                "Commedies aren't so good to be rated over 1000."
+                "Commedies aren't so good to be rated over 100 000."
             )
         return result
 
