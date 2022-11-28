@@ -1,6 +1,7 @@
 from django.db.models import DO_NOTHING, CharField, DateField, DateTimeField, ForeignKey, IntegerField, Model, \
     TextField, CASCADE, OneToOneField
 from django.contrib.auth.models import User
+from django.db import models
 from GameRank.admin import WebAppAdmin
 
 
@@ -27,3 +28,7 @@ class GameRank1(Model):
 class Profile(Model):
     username = OneToOneField(User, on_delete=CASCADE)
     clicks_left = IntegerField()
+
+class Wyniki(models.Model):
+    gracz = models.TextField(blank=True, null=True)
+    wynik = models.IntegerField(blank=True, null=True)
