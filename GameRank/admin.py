@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 
+
 class WebAppAdmin(admin.ModelAdmin):
 
    ordering = ['ranking']
@@ -13,3 +14,7 @@ class WebAppAdmin(admin.ModelAdmin):
       (None, {'fields': ['username', 'ranking', 'created']}),
    ]
    readonly_fields = ['created']
+
+
+
+

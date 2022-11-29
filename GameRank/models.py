@@ -29,6 +29,5 @@ class Profile(Model):
     username = OneToOneField(User, on_delete=CASCADE)
     clicks_left = IntegerField()
 
-class Wyniki(models.Model):
-    gracz = models.TextField(blank=True, null=True)
-    wynik = models.IntegerField(blank=True, null=True)
+
+

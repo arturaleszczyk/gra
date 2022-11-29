@@ -4,7 +4,7 @@ from constants import *
 
 conn = sqlite3.connect('db.sqlite3')
 c = conn.cursor()
-c.execute("""CREATE TABLE IF NOT EXISTS GRA(id integer primary key autoincrement, gracz TEXT,wynik integer)""")
+#c.execute("""CREATE TABLE IF NOT EXISTS GRA(id integer primary key autoincrement, gracz TEXT,wynik integer)""")
 class BestPlayers:
     def __init__(self, screen):
         self.screen = screen
@@ -30,7 +30,7 @@ class BestPlayers:
         lines = []
         for name, score in self.best_players: # zapisujemy do pliku
             d = conn.cursor()
-            d.execute("insert into GRA('gracz','wynik') values('{}','{}')".format(name,score))
+            d.execute("insert into Game_gra('gracz','wynik') values('{}','{}')".format(name,score))
             conn.commit()
         #     lines.append(f'{name} {score}\n')
         # with open('best.txt', 'w') as file:

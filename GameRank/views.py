@@ -17,7 +17,7 @@ from django.views import View
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import GameRank1, Profile, Wyniki
+from .models import GameRank1, Profile
 from .forms import GameRankForm, SingUpForm
 
 def hello(request):
