@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from GameRank.models import GameRank1
 from GameRank.admin import WebAppAdmin
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
@@ -32,5 +32,6 @@ urlpatterns = [
     path('accounts/password_change/', PasswordChangeView.as_view(), name='password_change'),
     path('accounts/password_change/done/', PasswordChangeDoneView.as_view(), name='password_change_done'),
     path('accounts/sign_up', SignUpView.as_view(), name='sign_up'),
-    path('wyniki/', gra_response)
+    path('wyniki/', gra_response),
+    path('game/', include('Game.urls'))
 ]
