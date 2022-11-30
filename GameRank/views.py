@@ -1,72 +1,21 @@
-import sqlite3
-
-from django.shortcuts import render
-
-from django.http import HttpResponse
-
-
-
-import json
-import os.path
-import random
-import string
 from logging import getLogger
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render
 from django.views import View
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import GameRank1, Profile
 from .forms import GameRankForm, SingUpForm
-
-def hello(request):
-    return HttpResponse('Hello, world!')
-
 LOGGER = getLogger()
 
-
-# def append_to_json(url, short_code):
-#     data = {}
-#     if os.path.exists('data.json'):
-#         with open('data.json', 'r') as f:
-#             data = json.load(f)
-#     data[short_code] = url
-#     with open('data.json', 'w') as f:
-#         f.write(json.dumps(data))
-#
-#
-# def redirects(request, short_code):
-#     url_obj = Url.objects.get(short_code=short_code)
-#     return redirect(url_obj.url)
-#
-#
-# def template_view(request):
-#     return render(
-#        request,
-#        template_name='hello.html',
-#        context={
-#            'adjectives':
-#                ['beautiful',
-#                 'wonderful',
-#                 'cruel',
-#                 'awful'],
-#            'numbers': range(1, 11)
-#        }
-#     )
-
-
 def gamerank_list(request):
-    # return render(
-    #     request,
-    #     template_name='gamerank_list.html',
-    #     context={'gamerank': GameRank1.objects.all()}
-    # )
-    username = GameRank1.objects.all()
-    ranking = GameRank1.objects.values('username', 'ranking')
-    list = username, ranking
-    return render(request, 'gamerank_list.html', {'lista': list})
+    ranking = GameRank1.objects.values('username','ranking')
+    return render(request, 'gamerank_list.html', {'rankinglist': ranking})
 
+# def update_game_rank(request):
+#     game_rank: QuerySet = GameRank1.objects.all()
+#     print(game_rank.values())
+#     return HttpResponse(game_rank)
 
 class GameRankCreateView(CreateView):
 
@@ -120,13 +69,4 @@ class GameRankView(LoginRequiredMixin, View):
        else:
            return render(request, template_name='no_clicks.html')
 
-def gra_response(request):
-    sql_query = """
-    Select gracz, wynik from GRA
-    order BY wynik DESC"""
-    con = sqlite3.connect('Gra/db.sqlite3')
-    cur = con.cursor()
-    cur.execute(sql_query)
-    result = cur.fetchall()
-    return render(request, 'wyniki.html', {'x': result})
 
