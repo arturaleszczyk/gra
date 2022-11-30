@@ -5,19 +5,8 @@ from django.db import models
 from GameRank.admin import WebAppAdmin
 
 
-# Create your models here.
-# class Genre(Model):
-#     # username = WebAppAdmin('username')
-#     # username = ForeignKey(username.WebAppAdmin, on_delete=DO_NOTHING)
-#     username = CharField(max_length=128)
-#
-#     def __str__(self):
-#         return self.username
-
-
 class GameRank1(Model):
-    # username_id = Genre(int, ForeignKey("username", on_delete=DO_NOTHING))
-    username = ForeignKey(User, on_delete=DO_NOTHING)
+    username = ForeignKey(User, to_field="username", on_delete=CASCADE)
     ranking = IntegerField()
     created = DateTimeField(auto_now_add=True)
 

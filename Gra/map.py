@@ -2,8 +2,8 @@
 from pygame import image, Color
 from constants import *
 
-moveimage = image.load('images/move_map.png')
-dotimage = image.load('images/dot_map.png')
+moveimage = image.load('Gra/images/move_map.png')
+dotimage = image.load('Gra/images/dot_map.png')
 
 
 def check_move_point(pacman):
