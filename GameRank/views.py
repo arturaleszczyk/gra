@@ -67,6 +67,7 @@ def gamerank_list(request):
     list = username, ranking
     return render(request, 'gamerank_list.html', {'lista': list})
 
+
 class GameRankCreateView(CreateView):
 
     template_name = 'form.html'
