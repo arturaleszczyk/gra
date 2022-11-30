@@ -15,6 +15,3 @@ class WebAppAdmin(admin.ModelAdmin):
    ]
    readonly_fields = ['created']
 
-
-
-
