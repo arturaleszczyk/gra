@@ -9,4 +9,3 @@ class GRA(models.Model):
         return self.graOdczyt()
     def graOdczyt(self):
         return f'Gracz o imieniu {self.gracz} uzyskał wynik: {self.wynik}'
-

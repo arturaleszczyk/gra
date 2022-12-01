@@ -1,8 +1,7 @@
 from django.db.models import DO_NOTHING, CharField, DateField, DateTimeField, ForeignKey, IntegerField, Model, \
     TextField, CASCADE, OneToOneField
 from django.contrib.auth.models import User
-from django.db import models
-from GameRank.admin import WebAppAdmin
+
 
 
 class GameRank1(Model):

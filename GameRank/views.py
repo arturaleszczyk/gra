@@ -8,14 +8,24 @@ from .models import GameRank1, Profile
 from .forms import GameRankForm, SingUpForm
 LOGGER = getLogger()
 
-def gamerank_list(request):
-    ranking = GameRank1.objects.values('username','ranking')
-    return render(request, 'gamerank_list.html', {'rankinglist': ranking})
+# def gamerank_list(request):
+#     ranking = GameRank1.objects.values('username','ranking')
+#     return render(request, 'gamerank_list.html', {'rankinglist': ranking})
 
-# def update_game_rank(request):
-#     game_rank: QuerySet = GameRank1.objects.all()
-#     print(game_rank.values())
-#     return HttpResponse(game_rank)
+def gamerank_list(request):
+    # for x in range(2):
+    username = GameRank1.objects.values('username')
+    rankingVal = GameRank1.objects.values('ranking')
+        # # ranking = {"User":username, "ranking":rankingVal}
+        # ranking = {username, rankingVal}
+        # ranking = {GameRank1.objects.values('username'), GameRank1.objects.values('ranking')}
+    return render(request, 'gamerank_list.html', {'rankinglist': rankingVal}, {'usernamelist': username})
+
+def update_gamerank(request):
+    Gr1Obj1 = GameRank1.objects.values('username')
+    # Gr1Obj2 = GameRank1.objects.values('ranking')
+    # Gr1Obj = {Gr1Obj1: Gr1Obj2}
+    return render(request, 'gamerank_list.html', {'update_gamerank': Gr1Obj1})
 
 class GameRankCreateView(CreateView):
 
